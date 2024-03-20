@@ -12,19 +12,19 @@ enum Weekday: String, CaseIterable {
     var calendarDayNumber: Int {
         switch self {
         case .Monday:
-            return 1
-        case .Tuesday:
             return 2
-        case .Wednesday:
+        case .Tuesday:
             return 3
-        case .Thursday:
+        case .Wednesday:
             return 4
-        case .Friday:
+        case .Thursday:
             return 5
-        case .Saturday:
+        case .Friday:
             return 6
-        case .Sunday:
+        case .Saturday:
             return 7
+        case .Sunday:
+            return 1
         }
     }
     

@@ -23,10 +23,12 @@ final class SettingsHabitOrEventCell: UITableViewCell {
     
     // MARK: - Private Methods
     private func setupConstraints() {
-        contentView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        let heightCell = contentView.heightAnchor.constraint(equalToConstant: 75)
+        heightCell.priority = .defaultHigh
         contentView.addSubview(chevronImage)
         chevronImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            heightCell,
             chevronImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             chevronImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
