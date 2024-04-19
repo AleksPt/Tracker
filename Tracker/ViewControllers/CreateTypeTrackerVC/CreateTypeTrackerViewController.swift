@@ -1,10 +1,8 @@
 import UIKit
 
 final class CreateTypeTrackerViewController: UIViewController {
-    
     //MARK: - Delegate
     weak var delegate: CreateTypeTrackerDelegate?
-    
     //MARK: - UI
     private var titleLabel: UILabel = {
         var label = UILabel()
@@ -48,7 +46,6 @@ final class CreateTypeTrackerViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +53,6 @@ final class CreateTypeTrackerViewController: UIViewController {
         setupConstraints()
         view.backgroundColor = .ypWhite
     }
-    
     //MARK: - Private Methods
     private func setupConstraints() {
         var constraints = [NSLayoutConstraint]()
@@ -80,17 +76,14 @@ final class CreateTypeTrackerViewController: UIViewController {
         stackView.addArrangedSubview(createHabitButton)
         stackView.addArrangedSubview(createIrregularEvent)
     }
-    
     //MARK: - Objc Methods
     @objc private func createNewTask() {
-        print("create new task")
         let viewController = NewHabitViewController()
         viewController.trackerCreateViewControllerDelegate = self
         present(viewController, animated: true)
     }
     
     @objc private func createNewIrregularEvent() {
-        print("Create irregular event")
         let viewController = NewEventViewController()
         viewController.delegate = self
         present(viewController, animated: true)
@@ -99,8 +92,9 @@ final class CreateTypeTrackerViewController: UIViewController {
 
 // MARK: - TrackerCreatingViewControllerDelegate:
 extension CreateTypeTrackerViewController: TrackerCreateViewControllerDelegate {
-    func passingTracker(_ tracker: Tracker,  _ category: String, from: UIViewController) {
+    func passingTracker(_ tracker: Tracker, _ category: String) {
         self.dismiss(animated: true)
-        delegate?.plusTracker(tracker, category, from: self)
+        delegate?.createTracker(tracker, with: category)
     }
 }
+

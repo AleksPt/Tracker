@@ -1,16 +1,12 @@
 import UIKit
 
 final class SettingsScheduleCell: UITableViewCell {
-    
     // MARK: - Identider
     static let cellIdentifier = "TableViewCell"
-    
     // MARK: - Delegate
     weak var delegate: ScheduleCellDelegate?
-    
     // MARK: - Private Properties
     private var weekDay: Weekday?
-    
     //MARK: - UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -34,7 +30,6 @@ final class SettingsScheduleCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,7 +40,6 @@ final class SettingsScheduleCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Public Methods:
     func configureCell(with weekDay: Weekday, isLastCell: Bool, isSelected: Bool) {
         self.weekDay = weekDay
@@ -53,7 +47,6 @@ final class SettingsScheduleCell: UITableViewCell {
         separatorView.isHidden = isLastCell
         switchButton.isOn = isSelected
     }
-    
     // MARK: - Private Methods:
     private func setupViews() {
         contentView.backgroundColor = .ypBackground
@@ -85,7 +78,6 @@ final class SettingsScheduleCell: UITableViewCell {
             
         ])
     }
-    
     // MARK: - Objc Methods
     @objc private func switchButtonTapped(_ sender: UISwitch) {
         guard let weekDay = weekDay else { return }

@@ -1,15 +1,12 @@
 import UIKit
 
 final class SettingsHabitOrEventCell: UITableViewCell {
-    
     //MARK: - Identifer
     static let cellIdentifer = "cell"
-    
     //MARK: - UI
     private lazy var chevronImage: UIImageView = {
         return UIImageView(image: UIImage(named: "Chevron"))
     }()
-    
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -20,15 +17,12 @@ final class SettingsHabitOrEventCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Private Methods
     private func setupConstraints() {
-        let heightCell = contentView.heightAnchor.constraint(equalToConstant: 75)
-        heightCell.priority = .defaultHigh
+        contentView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         contentView.addSubview(chevronImage)
         chevronImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            heightCell,
             chevronImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             chevronImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])

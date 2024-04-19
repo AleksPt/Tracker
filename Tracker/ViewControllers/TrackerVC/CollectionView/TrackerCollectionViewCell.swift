@@ -1,20 +1,16 @@
 import UIKit
 
 final class TrackerCollectionViewCell: UICollectionViewCell {
-    
     //MARK: - Delegate:
     weak var delegate: TrackerCellDelegate?
-    
     //MARK: - Identifer:
     static let identifier = "TrackersCell"
-    
     // MARK: - Private Properties:
     private let plusButtonImage = UIImage(named: "PlusTask")
     private let doneButtonImage = UIImage(named: "DoneCollectionButton")
     private var trackerIdentifer: UUID? = nil
     private var isCompleted: Bool = false
     private var indexPath: IndexPath?
-    
     //MARK: - UI:
     private lazy var trackerView: UIView = {
         var view = UIView()
@@ -72,7 +68,6 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,7 +78,6 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Public Methods:
     func cellSettings(id: UUID,
                       name: String,
@@ -91,8 +85,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
                       emoji: String,
                       completedDays: Int,
                       isEnabled: Bool,
-                      isCompleted: Bool,
-                      indexPath: IndexPath) {
+                      isCompleted: Bool) {
         self.trackerIdentifer = id
         self.textTrackerLabel.text = name
         self.trackerView.backgroundColor = color
@@ -104,9 +97,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         let image = isCompleted ? doneButtonImage : plusButtonImage
         plusButton.setImage(image, for: .normal)
         plusButton.alpha = isCompleted ? 0.3 : 1
-        self.indexPath = indexPath
     }
-    
     // MARK: - Private Methods:
     private func configureCell() {
         contentView.addSubview(trackerView)
@@ -147,10 +138,9 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
             plusButton.heightAnchor.constraint(equalToConstant: 34),
         ])
     }
-    
     //  MARK: - Objc Methods:
     @objc private func plusButtonTapped() {
-        guard let id = trackerIdentifer, let indexPath = indexPath else { return }
-        delegate?.trackerCompleted(for: id, at: indexPath)
+        guard let id = trackerIdentifer else { return }
+        delegate?.trackerCompleted(for: id)
     }
 }

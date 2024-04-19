@@ -1,7 +1,11 @@
 import Foundation
 
 extension Date {
-    var onlyDate: DateComponents {
-        Calendar.current.dateComponents([.year, .month, .day], from: self)
+    func presentDay(_ date: Date) -> Bool {
+        Calendar.current.compare(self, to: date, toGranularity: .day) == .orderedSame
+    }
+    
+    func beforeDay(_ date: Date) -> Bool {
+        Calendar.current.compare(self, to: date, toGranularity: .day) == .orderedAscending
     }
 }

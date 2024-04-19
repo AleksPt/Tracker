@@ -1,6 +1,6 @@
 import Foundation
 
-enum Weekday: String, CaseIterable {
+enum Weekday: String, CaseIterable, Codable {
     case Monday = "Понедельник"
     case Tuesday = "Вторник"
     case Wednesday = "Среда"

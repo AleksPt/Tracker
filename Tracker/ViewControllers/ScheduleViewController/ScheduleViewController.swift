@@ -1,13 +1,10 @@
 import UIKit
 
 final class ScheduleViewController: UIViewController {
-    
     //MARK: - Delegate
     weak var delegate: ScheduleViewControllerDelegate?
-    
     //MARK: - Private Properties
     private var selectWeekDays: Set<Weekday> = []
-    
     //MARK: - UI
     private var titleLabel: UILabel = {
         var label = UILabel()
@@ -51,7 +48,6 @@ final class ScheduleViewController: UIViewController {
         categoryOrScheduleTableView.delegate = self
         categoryOrScheduleTableView.dataSource = self
     }
-    
     //MARK: - Private Methods
     private func setupConstraints() {
         var constraints = [NSLayoutConstraint]()
@@ -78,7 +74,6 @@ final class ScheduleViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(doneButton)
     }
-    
     //MARK: - Objc Methods
     @objc private func doneButtonClicked() {
         let weekDays = Array(selectWeekDays)
@@ -86,7 +81,6 @@ final class ScheduleViewController: UIViewController {
         self.dismiss(animated: true)
     }
 }
-
 // MARK: - ScheduleCellDelegate
 extension ScheduleViewController: ScheduleCellDelegate {
     func switchButtonClicked(to isSelected: Bool, of weekDay: Weekday) {
@@ -97,7 +91,6 @@ extension ScheduleViewController: ScheduleCellDelegate {
         }
     }
 }
-
 //MARK: - UITableViewDelegate
 extension ScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -1,10 +1,8 @@
 import UIKit
 
 final class TrackerCollectionViewHeader: UICollectionReusableView {
-    
     //MARK: - Identifer:
     static let identifier = "header"
-    
     // MARK: - UI:
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -12,7 +10,6 @@ final class TrackerCollectionViewHeader: UICollectionReusableView {
         label.font = .systemFont(ofSize: 19, weight: .bold)
         return label
     }()
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +18,6 @@ final class TrackerCollectionViewHeader: UICollectionReusableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Private Methods:
     private func setupConstraints() {
         addSubview(titleLabel)
