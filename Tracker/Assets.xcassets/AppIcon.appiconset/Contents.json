@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "iconStore.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

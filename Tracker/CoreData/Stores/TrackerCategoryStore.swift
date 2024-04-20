@@ -1,10 +1,3 @@
-//
-//  TrackerCategoryStore.swift
-//  Tracker
-//
-//  Created by Ivan Cherkashin on 23.01.2024.
-//
-
 import UIKit
 import CoreData
 
@@ -21,10 +14,8 @@ final class TrackerCategoryStore: NSObject {
     static let shared = TrackerCategoryStore()
     // MARK: - Public Properties
     var categories: [TrackerCategory] {
-        guard let categories = try? getListCategories().map({ try self.convertToTrackerCategory($0) }) else {
-            return []
-        }
-        return categories
+            let categories = try? getListCategories().map { try self.convertToTrackerCategory($0) }
+            return categories ?? []
     }
     // MARK: - Private Properties
     private let trackerStore = TrackerStore.shared

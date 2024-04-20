@@ -21,6 +21,9 @@ final class DaysTransformer: ValueTransformer {
     }
     
     static func register() {
-        ValueTransformer.setValueTransformer(DaysTransformer(), forName: NSValueTransformerName(rawValue: String(describing: DaysTransformer.self)))
+        ValueTransformer.setValueTransformer(
+            DaysTransformer(),
+            forName: NSValueTransformerName(rawValue: String(describing: DaysTransformer.self))
+        )
     }
 }

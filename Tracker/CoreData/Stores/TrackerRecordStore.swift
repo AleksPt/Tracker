@@ -1,10 +1,3 @@
-//
-//  TrackerRecordStore.swift
-//  Tracker
-//
-//  Created by Ivan Cherkashin on 23.01.2024.
-//
-
 import UIKit
 import CoreData
 
@@ -18,16 +11,7 @@ final class TrackerRecordStore: NSObject {
     static let shared = TrackerRecordStore()
     // MARK: - Public Properties
     var records: [TrackerRecord]? {
-        var recordsCoreData: [TrackerRecord]?
-        do {
-            recordsCoreData = try getTrackerRecords()
-        } catch {
-            TrackerRecordStoreError.failedFetchRecords
-        }
-        guard let fetchedRecords = recordsCoreData else {
-            return []
-        }
-        return fetchedRecords
+        try? getTrackerRecords() ?? []
     }
     // MARK: - Private Properties
     private var context: NSManagedObjectContext

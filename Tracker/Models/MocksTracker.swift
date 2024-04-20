@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 final class MocksTracker {
     static var mocksTrackers: [TrackerCategory] = [
