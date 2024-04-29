@@ -50,7 +50,14 @@
 		E27839A12B614B1D00F0C003 /* ProtocolTrackerStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839A02B614B1D00F0C003 /* ProtocolTrackerStoreDelegate.swift */; };
 		E27839A32B61575600F0C003 /* UIColorMarshalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839A22B61575600F0C003 /* UIColorMarshalling.swift */; };
 		E27839A52B62561B00F0C003 /* ProtocolCategoryViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839A42B62561B00F0C003 /* ProtocolCategoryViewControllerDelegate.swift */; };
-		E27839A72B628E0E00F0C003 /* ProtocolNewCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839A62B628E0E00F0C003 /* ProtocolNewCategoryViewController.swift */; };
+		E27839F22B65387B00F0C003 /* OnboardingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839F12B65387B00F0C003 /* OnboardingStorage.swift */; };
+		E27839F42B65391A00F0C003 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839F32B65391A00F0C003 /* OnboardingPageViewController.swift */; };
+		E27839F62B65393000F0C003 /* FirstScreenOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839F52B65393000F0C003 /* FirstScreenOnboardingViewController.swift */; };
+		E27839F82B65395400F0C003 /* SecondScreenOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839F72B65395400F0C003 /* SecondScreenOnboardingViewController.swift */; };
+		E27839FA2B65525F00F0C003 /* FirstSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839F92B65525F00F0C003 /* FirstSetupViewController.swift */; };
+		E27839FC2B663B6900F0C003 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839FB2B663B6900F0C003 /* CategoryViewModel.swift */; };
+		E27839FE2B66406600F0C003 /* ProtocolTrackerCategoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27839FD2B66406600F0C003 /* ProtocolTrackerCategoryDelegate.swift */; };
+		E2783A1D2B66A0F400F0C003 /* CategorySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2783A1C2B66A0F300F0C003 /* CategorySettingsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +106,14 @@
 		E27839A02B614B1D00F0C003 /* ProtocolTrackerStoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTrackerStoreDelegate.swift; sourceTree = "<group>"; };
 		E27839A22B61575600F0C003 /* UIColorMarshalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorMarshalling.swift; sourceTree = "<group>"; };
 		E27839A42B62561B00F0C003 /* ProtocolCategoryViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolCategoryViewControllerDelegate.swift; sourceTree = "<group>"; };
-		E27839A62B628E0E00F0C003 /* ProtocolNewCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolNewCategoryViewController.swift; sourceTree = "<group>"; };
+		E27839F12B65387B00F0C003 /* OnboardingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStorage.swift; sourceTree = "<group>"; };
+		E27839F32B65391A00F0C003 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		E27839F52B65393000F0C003 /* FirstScreenOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenOnboardingViewController.swift; sourceTree = "<group>"; };
+		E27839F72B65395400F0C003 /* SecondScreenOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreenOnboardingViewController.swift; sourceTree = "<group>"; };
+		E27839F92B65525F00F0C003 /* FirstSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSetupViewController.swift; sourceTree = "<group>"; };
+		E27839FB2B663B6900F0C003 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		E27839FD2B66406600F0C003 /* ProtocolTrackerCategoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTrackerCategoryDelegate.swift; sourceTree = "<group>"; };
+		E2783A1C2B66A0F300F0C003 /* CategorySettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +208,9 @@
 			isa = PBXGroup;
 			children = (
 				E207C8872B52E04200A8DDFB /* CategoryViewController.swift */,
+				E27839FB2B663B6900F0C003 /* CategoryViewModel.swift */,
 				E27839A42B62561B00F0C003 /* ProtocolCategoryViewControllerDelegate.swift */,
+				E2783A1C2B66A0F300F0C003 /* CategorySettingsTableViewCell.swift */,
 			);
 			path = CategoryViewController;
 			sourceTree = "<group>";
@@ -203,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				E207C8892B52E1BF00A8DDFB /* CreateNewCategoryViewController.swift */,
-				E27839A62B628E0E00F0C003 /* ProtocolNewCategoryViewController.swift */,
 			);
 			name = CreateNewCategoryViewController;
 			sourceTree = "<group>";
@@ -228,6 +243,8 @@
 			isa = PBXGroup;
 			children = (
 				E26028E82B35D29A00DD5493 /* AppDelegate.swift */,
+				E27839F92B65525F00F0C003 /* FirstSetupViewController.swift */,
+				E27839F02B65383800F0C003 /* ScreenOnboarding */,
 				E278398E2B6018FC00F0C003 /* CoreData */,
 				E26420D72B59128300CE130A /* TabBarViewController */,
 				E207C8802B51C24100A8DDFB /* ViewControllers */,
@@ -288,9 +305,21 @@
 				E27839982B60198500F0C003 /* TrackerStore.swift */,
 				E27839A02B614B1D00F0C003 /* ProtocolTrackerStoreDelegate.swift */,
 				E278399A2B60198F00F0C003 /* TrackerCategoryStore.swift */,
+				E27839FD2B66406600F0C003 /* ProtocolTrackerCategoryDelegate.swift */,
 				E278399C2B60199700F0C003 /* TrackerRecordStore.swift */,
 			);
 			path = Stores;
+			sourceTree = "<group>";
+		};
+		E27839F02B65383800F0C003 /* ScreenOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E27839F12B65387B00F0C003 /* OnboardingStorage.swift */,
+				E27839F32B65391A00F0C003 /* OnboardingPageViewController.swift */,
+				E27839F52B65393000F0C003 /* FirstScreenOnboardingViewController.swift */,
+				E27839F72B65395400F0C003 /* SecondScreenOnboardingViewController.swift */,
+			);
+			path = ScreenOnboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +397,7 @@
 				E26028FF2B35DCC400DD5493 /* TrackerViewController.swift in Sources */,
 				E26420D62B58420700CE130A /* Extension Int.swift in Sources */,
 				E278399B2B60198F00F0C003 /* TrackerCategoryStore.swift in Sources */,
+				E27839FE2B66406600F0C003 /* ProtocolTrackerCategoryDelegate.swift in Sources */,
 				E260296E2B39D59500DD5493 /* TrackerCategory.swift in Sources */,
 				E207C8982B57ACA200A8DDFB /* MocksTracker.swift in Sources */,
 				E207C8942B57978700A8DDFB /* TrackerCollectionViewCell.swift in Sources */,
@@ -388,12 +418,18 @@
 				E26029722B3A3A9600DD5493 /* CreateTypeTrackerViewController.swift in Sources */,
 				E26420D92B59425600CE130A /* SettingsHabitOrEventCell.swift in Sources */,
 				E27839502B5E783800F0C003 /* HeaderEmojiCell.swift in Sources */,
+				E27839F62B65393000F0C003 /* FirstScreenOnboardingViewController.swift in Sources */,
+				E2783A1D2B66A0F400F0C003 /* CategorySettingsTableViewCell.swift in Sources */,
+				E27839FA2B65525F00F0C003 /* FirstSetupViewController.swift in Sources */,
 				E207C88D2B544EF200A8DDFB /* SettingsScheduleCell.swift in Sources */,
+				E27839FC2B663B6900F0C003 /* CategoryViewModel.swift in Sources */,
 				E207C8962B57AB7A00A8DDFB /* TrackerCollectionViewHeader.swift in Sources */,
 				E26029702B39D59F00DD5493 /* TrackerRecord.swift in Sources */,
 				E2392D7D2B5ADC9D003E42AB /* ProtocolScheduleViewControllerDelegate.swift in Sources */,
 				E2392D712B5AA1D8003E42AB /* Extension Date.swift in Sources */,
 				E278399D2B60199700F0C003 /* TrackerRecordStore.swift in Sources */,
+				E27839F42B65391A00F0C003 /* OnboardingPageViewController.swift in Sources */,
+				E27839F82B65395400F0C003 /* SecondScreenOnboardingViewController.swift in Sources */,
 				E207C88A2B52E1BF00A8DDFB /* CreateNewCategoryViewController.swift in Sources */,
 				E27839962B60196A00F0C003 /* TrackersModelCoreData.xcdatamodeld in Sources */,
 				E27839A52B62561B00F0C003 /* ProtocolCategoryViewControllerDelegate.swift in Sources */,
@@ -404,7 +440,7 @@
 				E207C8882B52E04200A8DDFB /* CategoryViewController.swift in Sources */,
 				E27839A12B614B1D00F0C003 /* ProtocolTrackerStoreDelegate.swift in Sources */,
 				E260296C2B39D58300DD5493 /* Tracker.swift in Sources */,
-				E27839A72B628E0E00F0C003 /* ProtocolNewCategoryViewController.swift in Sources */,
+				E27839F22B65387B00F0C003 /* OnboardingStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +596,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.alexpetrenko;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.alexpetrenko.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -591,7 +627,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.alexpetrenko;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.alexpetrenko.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

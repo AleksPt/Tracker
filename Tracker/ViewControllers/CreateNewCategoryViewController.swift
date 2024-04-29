@@ -1,7 +1,6 @@
 import UIKit
+
 final class CreateNewCategoryViewController: UIViewController {
-    // MARK: - Delegate:
-    weak var delegate: NewCategoryViewControllerProtocol?
     // MARK: - Private properties:
     private var categoryName: String = ""
     private let categoryStore = TrackerCategoryStore.shared
@@ -39,6 +38,7 @@ final class CreateNewCategoryViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.clearButtonMode = .whileEditing
+        textField.addTarget(self, action: #selector(setTextValue), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -49,6 +49,7 @@ final class CreateNewCategoryViewController: UIViewController {
         self.addTapGestureToHideKeyboard()
         setupView()
         setupConstraints()
+        checkCorrectness()
         view.backgroundColor = .ypWhite
     }
     //MARK: - Private Methods
@@ -77,6 +78,21 @@ final class CreateNewCategoryViewController: UIViewController {
         view.addSubview(nameTrackerTextField)
         view.addSubview(doneButton)
     }
+    
+    private func checkCorrectness() {
+        guard let text = nameTrackerTextField.text else {
+            return
+        }
+        doneButton.isEnabled = !text.isEmpty
+        if doneButton.isEnabled {
+            doneButton.backgroundColor = .ypBlack
+            doneButton.tintColor = .ypWhite
+        } else {
+            doneButton.backgroundColor = .ypGray
+            doneButton.tintColor = .ypWhite
+        }
+    }
+    
     //MARK: - Objc Metods
     @objc private func doneButtonClicked() {
         do {
@@ -90,8 +106,11 @@ final class CreateNewCategoryViewController: UIViewController {
             alertController.addAction(OKAction)
             self.present(alertController, animated: true, completion: nil)
         }
-        delegate?.reloadTable()
         self.dismiss(animated: true)
+    }
+    
+    @objc private func setTextValue() {
+        checkCorrectness()
     }
 }
 

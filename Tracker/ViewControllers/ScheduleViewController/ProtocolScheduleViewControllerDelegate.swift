@@ -1,5 +1,6 @@
 import Foundation
 
 protocol ScheduleViewControllerDelegate: AnyObject {
-    func didSelectDays(_ days: [Weekday])
+    var selectWeekDays: [Weekday] { get set }
+    func didSelectDays()
 }

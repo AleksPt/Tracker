@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-private enum TrackeryCategoryStoreError: Error {
+private enum TrackerCategoryStoreError: Error {
     case decodingErrorInvalidName
     case decodingErrorInvalidTrackers
     case failedFetchTrackerCategory
@@ -12,17 +12,17 @@ private enum TrackeryCategoryStoreError: Error {
 final class TrackerCategoryStore: NSObject {
     // MARK: - Identifer
     static let shared = TrackerCategoryStore()
+    //MARK: - Delegate
+    weak var delegate: TrackerCategoryDelegate?
     // MARK: - Public Properties
     var categories: [TrackerCategory] {
             let categories = try? getListCategories().map { try self.convertToTrackerCategory($0) }
             return categories ?? []
-    }
+        }
     // MARK: - Private Properties
     private let trackerStore = TrackerStore.shared
     private let context: NSManagedObjectContext
-    
-    private var categoryFetchedResultsController: NSFetchedResultsController<TrackerCategoryCoreData>
-    
+    private var categoryFetchedResultsController: NSFetchedResultsController<TrackerCategoryCoreData>?
     // MARK: - Initializers:
     convenience override init() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -34,7 +34,7 @@ final class TrackerCategoryStore: NSObject {
     
     init(context: NSManagedObjectContext) {
         self.context = context
-        
+        super.init()
         let fetchRequest = TrackerCategoryCoreData.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
@@ -43,6 +43,7 @@ final class TrackerCategoryStore: NSObject {
             managedObjectContext: context,
             sectionNameKeyPath: nil,
             cacheName: nil)
+        controller.delegate = self
         self.categoryFetchedResultsController = controller
         try? controller.performFetch()
     }
@@ -56,11 +57,11 @@ final class TrackerCategoryStore: NSObject {
     
     func convertToTrackerCategory(_ model: TrackerCategoryCoreData) throws -> TrackerCategory {
         guard let trackers = model.trackers else {
-            throw TrackeryCategoryStoreError.decodingErrorInvalidTrackers
+            throw TrackerCategoryStoreError.decodingErrorInvalidTrackers
         }
         
         guard let name = model.name else {
-            throw TrackeryCategoryStoreError.decodingErrorInvalidName
+            throw TrackerCategoryStoreError.decodingErrorInvalidName
         }
         
         let category = TrackerCategory(
@@ -76,27 +77,14 @@ final class TrackerCategoryStore: NSObject {
     }
     
     func fetchTrackerCategoryCoreData(title: String) throws -> TrackerCategoryCoreData? {
-        let request = categoryFetchedResultsController.fetchRequest
+        let request = TrackerCategoryCoreData.fetchRequest()
         request.predicate = NSPredicate(
             format: "%K == %@",
             #keyPath(TrackerCategoryCoreData.name), title)
         guard let category = try context.fetch(request).first else {
-            throw TrackeryCategoryStoreError.failedFetchTrackerCategory
+            throw TrackerCategoryStoreError.failedFetchTrackerCategory
         }
         return category
-    }
-    
-    func getListCategoriesCoreData() throws -> [String] {
-        let request = TrackerCategoryCoreData.fetchRequest()
-        request.returnsObjectsAsFaults = false
-        var list: [String] = []
-        do {
-            let objects = try context.fetch(request)
-            list = objects.compactMap { try? convertToTrackerCategory($0)}.map { $0.headerName }
-        } catch {
-            throw TrackeryCategoryStoreError.failedGetCategories
-        }
-        return list
     }
     
     func getListCategories() throws -> [TrackerCategoryCoreData] {
@@ -106,9 +94,9 @@ final class TrackerCategoryStore: NSObject {
         do {
             list = try context.fetch(request)
         } catch {
-            throw TrackeryCategoryStoreError.failedGetCategories
+            throw TrackerCategoryStoreError.failedGetCategories
         }
-        guard let categories = list else { fatalError("\(TrackeryCategoryStoreError.failedCreateRequest)")}
+        guard let categories = list else { fatalError("\(TrackerCategoryStoreError.failedCreateRequest)")}
         return categories
     }
     // MARK: - Private Methods
@@ -123,3 +111,8 @@ final class TrackerCategoryStore: NSObject {
     }
 }
 
+extension TrackerCategoryStore: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        delegate?.trackerCategoryDidUpdate()
+    }
+}

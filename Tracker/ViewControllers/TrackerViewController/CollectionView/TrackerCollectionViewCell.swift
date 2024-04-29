@@ -1,10 +1,3 @@
-//
-//  TrackersCollectionCell.swift
-//  Tracker
-//
-//  Created by Ivan Cherkashin on 17.01.2024.
-//
-
 import UIKit
 
 final class TrackerCollectionViewCell: UICollectionViewCell {

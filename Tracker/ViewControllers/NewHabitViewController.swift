@@ -5,7 +5,8 @@ final class NewHabitViewController: UIViewController {
     weak var scheduleViewControllerDelegate: ScheduleViewControllerDelegate?
     weak var trackerCreateViewControllerDelegate: TrackerCreateViewControllerDelegate?
     //MARK: - Private Properties
-    private var selectWeekDays: [Weekday] = []
+    var selectWeekDays: [Weekday] = []
+    let categoryViewModel = CategoryViewModel()
     internal var selectedCategory: String = ""
     private var configure: Array<SettingOptions> = []
     private let emojis: [String] = [
@@ -163,8 +164,8 @@ final class NewHabitViewController: UIViewController {
         view.backgroundColor = .ypWhite
         setupView()
         setupConstraints()
-        self.addTapGestureToHideKeyboard()
         checkCorrectness()
+        self.addTapGestureToHideKeyboard()
     }
     //MARK: - Private Methods
     private func setupConstraints() {
@@ -312,13 +313,13 @@ extension NewHabitViewController: UITableViewDataSource {
 extension NewHabitViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
-            let viewController = CategoryViewController()
-            viewController.delegate = self
+            let viewController = CategoryViewController(viewModel: categoryViewModel)
+            viewController.viewModelDelegate = self
             self.present(viewController, animated: true)
         } else if indexPath.row == 1 {
             let viewController = ScheduleViewController()
             viewController.delegate = self
-            self.scheduleViewControllerDelegate?.didSelectDays(self.selectWeekDays)
+            
             self.present(viewController, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -327,17 +328,16 @@ extension NewHabitViewController: UITableViewDelegate {
 }
 // MARK: - ScheduleViewControllerDelegate
 extension NewHabitViewController: ScheduleViewControllerDelegate {
-    func didSelectDays(_ days: [Weekday]) {
-        selectWeekDays = days
-        let schedule = days.isEmpty ? "" : days.map { $0.shortDayName }.joined(separator: ", ")
+    func didSelectDays() {
+        let schedule = selectWeekDays.isEmpty ? "" : selectWeekDays.map { $0.shortDayName }.joined(separator: ", ")
         configure[1].pickedSettings = schedule
         categoryOrScheduleTableView.reloadData()
+        checkCorrectness()
         dismiss(animated: true)
     }
 }
 extension NewHabitViewController: CategoryViewControllerDelegate {
-    func didSelectCategory(category: String) {
-        selectedCategory = category
+    func didSelectCategory() {
         configure[0].pickedSettings = selectedCategory
         categoryOrScheduleTableView.reloadData()
         checkCorrectness()
@@ -364,7 +364,7 @@ extension NewHabitViewController: UICollectionViewDataSource {
                 for: indexPath) as? ColorCell else {
                 assertionFailure("Не удалось выполнить приведение к ColorCell")
                 return UICollectionViewCell()
-            }  
+            }
             cell.configure(backgroundColor: colors[indexPath.row])
             return cell
         }
@@ -432,6 +432,7 @@ extension NewHabitViewController: UICollectionViewDelegate {
             cell?.layer.masksToBounds = true
             cell?.layer.cornerRadius = 16
             cell?.backgroundColor = .ypLightGray
+            checkCorrectness()
         } else if collectionView == colorCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? ColorCell
             selectedColor = colors[indexPath.item]
@@ -439,20 +440,20 @@ extension NewHabitViewController: UICollectionViewDelegate {
             cell?.layer.cornerRadius = 9
             cell?.layer.borderWidth = 3
             cell?.setBorderColorCell()
+            checkCorrectness()
         }
-        checkCorrectness()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == emojiCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? EmojiCell
             cell?.backgroundColor = .clear
-            
+            checkCorrectness()
         } else if collectionView == colorCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? ColorCell
             cell?.layer.borderWidth = 0
+            checkCorrectness()
         }
-        checkCorrectness()
     }
 }
 

@@ -11,8 +11,8 @@ final class TrackerRecordStore: NSObject {
     static let shared = TrackerRecordStore()
     // MARK: - Public Properties
     var records: [TrackerRecord]? {
-        try? getTrackerRecords() ?? []
-    }
+            try? getTrackerRecords() ?? []
+        }
     // MARK: - Private Properties
     private var context: NSManagedObjectContext
     // MARK: - Initializers:

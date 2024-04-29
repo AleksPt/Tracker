@@ -4,7 +4,7 @@ final class ScheduleViewController: UIViewController {
     //MARK: - Delegate
     weak var delegate: ScheduleViewControllerDelegate?
     //MARK: - Private Properties
-    private var selectWeekDays: Set<Weekday> = []
+    private var selectWeekDays: [Weekday] = []
     //MARK: - UI
     private var titleLabel: UILabel = {
         var label = UILabel()
@@ -48,6 +48,11 @@ final class ScheduleViewController: UIViewController {
         categoryOrScheduleTableView.delegate = self
         categoryOrScheduleTableView.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectWeekDays = delegate?.selectWeekDays ?? []
+    }
     //MARK: - Private Methods
     private func setupConstraints() {
         var constraints = [NSLayoutConstraint]()
@@ -76,8 +81,8 @@ final class ScheduleViewController: UIViewController {
     }
     //MARK: - Objc Methods
     @objc private func doneButtonClicked() {
-        let weekDays = Array(selectWeekDays)
-        delegate?.didSelectDays(weekDays)
+        delegate?.selectWeekDays = selectWeekDays
+        delegate?.didSelectDays()
         self.dismiss(animated: true)
     }
 }
@@ -85,9 +90,9 @@ final class ScheduleViewController: UIViewController {
 extension ScheduleViewController: ScheduleCellDelegate {
     func switchButtonClicked(to isSelected: Bool, of weekDay: Weekday) {
         if isSelected {
-            selectWeekDays.insert(weekDay)
+            selectWeekDays.append(weekDay)
         } else {
-            selectWeekDays.remove(weekDay)
+            selectWeekDays.removeAll { $0 == weekDay }
         }
     }
 }

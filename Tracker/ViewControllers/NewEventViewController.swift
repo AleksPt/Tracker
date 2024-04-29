@@ -3,6 +3,7 @@ import UIKit
 final class NewEventViewController: UIViewController {
     //MARK: - Delegate
     weak var delegate: TrackerCreateViewControllerDelegate?
+    let categoryViewModel = CategoryViewModel()
     //MARK: - Private Properties
     private var configure: Array<SettingOptions> = []
     internal var selectedCategory: String = ""
@@ -121,11 +122,11 @@ final class NewEventViewController: UIViewController {
         view.backgroundColor = .ypWhite
         setupView()
         setupConstraints()
+        checkCorrectness()
         appendSettingsToArray()
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
         self.addTapGestureToHideKeyboard()
-        checkCorrectness()
     }
     
     private lazy var emojiCollectionView: UICollectionView = {
@@ -278,8 +279,7 @@ final class NewEventViewController: UIViewController {
     }
 }
 extension NewEventViewController: CategoryViewControllerDelegate {
-    func didSelectCategory(category: String) {
-        selectedCategory = category
+    func didSelectCategory() {
         configure[0].pickedSettings = selectedCategory
         categoryTableView.reloadData()
         checkCorrectness()
@@ -314,8 +314,8 @@ extension NewEventViewController: UITableViewDataSource {
 extension NewEventViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let viewController = CategoryViewController()
-            viewController.delegate = self
+            let viewController = CategoryViewController(viewModel: categoryViewModel)
+            viewController.viewModelDelegate = self
             self.present(viewController, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -408,6 +408,7 @@ extension NewEventViewController: UICollectionViewDelegate {
             cell?.layer.masksToBounds = true
             cell?.layer.cornerRadius = 16
             cell?.backgroundColor = .ypLightGray
+            checkCorrectness()
         } else if collectionView == colorCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? ColorCell
             selectedColor = colors[indexPath.item]
@@ -415,20 +416,20 @@ extension NewEventViewController: UICollectionViewDelegate {
             cell?.layer.cornerRadius = 9
             cell?.layer.borderWidth = 3
             cell?.setBorderColorCell()
+            checkCorrectness()
         }
-        checkCorrectness()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == emojiCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? EmojiCell
             cell?.backgroundColor = .clear
-            
+            checkCorrectness()
         } else if collectionView == colorCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? ColorCell
             cell?.layer.borderWidth = 0
+            checkCorrectness()
         }
-        checkCorrectness()
     }
 }
 

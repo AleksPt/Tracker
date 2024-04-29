@@ -157,7 +157,7 @@ final class TrackerViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func setupView(){
+    private func setupView() {
         view.addSubview(trackersCollectionView)
         view.addSubview(stubImageView)
         view.addSubview(stubLabel)

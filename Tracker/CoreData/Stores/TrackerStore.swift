@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-private enum TrackeryStoreError: Error {
+private enum TrackerStoreError: Error {
     case decodingErrorInvalidModel
 }
 
@@ -70,7 +70,7 @@ final class TrackerStore: NSObject  {
             let colorString = modelCoreData.color,
             let emoji = modelCoreData.emoji,
             let schedule = modelCoreData.schedule as? [Weekday] else {
-            throw TrackeryStoreError.decodingErrorInvalidModel
+            throw TrackerStoreError.decodingErrorInvalidModel
         }
         let color = uiColorMarshalling.color(from: colorString)
         
