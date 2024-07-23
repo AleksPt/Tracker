@@ -29,6 +29,7 @@
 - Swift 5.9
 - UIKit
 - CoreData
+- UserDefaults
 - MVC архитектура
 - Минимальный таргет iOS 13.4
 
